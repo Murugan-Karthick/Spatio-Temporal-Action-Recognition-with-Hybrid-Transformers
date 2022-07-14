@@ -89,7 +89,7 @@ class PositionalEmbedding(layers.Layer):
 ```
 
 ### Build Transformer Encoder
-We used only the encoder part of the transformer to perfrom action recognition
+We used only the encoder part of the transformer to perform action recognition
 
 ```
 class TransformerEncoder(layers.Layer):
