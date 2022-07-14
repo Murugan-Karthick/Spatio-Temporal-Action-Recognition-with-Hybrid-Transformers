@@ -88,6 +88,7 @@ class PositionalEmbedding(layers.Layer):
         )
 ```
 
+### Build transformer encoder
 We used only the encoder part of the transformer to perfrom action recognition
 
 ```
