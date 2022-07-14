@@ -113,3 +113,27 @@ class TransformerEncoder(layers.Layer):
         # the output of layer normalization2 is passed to decoder
         return self.layernorm_2(proj_input + proj_output)
 ```
+
+## Model training
+```
+def run_experiment():
+    filepath = "./tmp/action_recognizer"
+    checkpoint = keras.callbacks.ModelCheckpoint(
+        filepath, save_weights_only=True, save_best_only=True, verbose=1
+    )
+
+    model = get_compiled_model()
+    history = model.fit(
+        train_data,
+        train_labels,
+        validation_split=0.15,
+        epochs=EPOCHS,
+        callbacks=[checkpoint],
+    )
+
+    model.load_weights(filepath)
+    _, accuracy = model.evaluate(test_data, test_labels)
+    print(f"Test accuracy: {round(accuracy * 100, 2)}%")
+
+    return history, model
+    ```
