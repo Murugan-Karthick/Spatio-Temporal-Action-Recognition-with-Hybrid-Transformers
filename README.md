@@ -139,3 +139,4 @@ def run_experiment():
 ```
 
 ## Model performance
+<img src="https://miro.medium.com/max/1400/1*iy12bH-FiUNOy9-0bULgSg.png"/>
