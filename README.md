@@ -137,3 +137,5 @@ def run_experiment():
 
     return history, model
 ```
+
+## Model performance
