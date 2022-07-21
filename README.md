@@ -184,8 +184,8 @@ def predict_action(path):
 
 ## Output
 <img src="https://github.com/Murugan-Karthick/Spatio-Temporal-Action-Recognition-with-Hybrid-Transformers/blob/main/animation.gif" width="300" height="300"/>
-PlayingCello: 100.00%
-ShavingBeard:  0.00%
-Punch:  0.00%
-TennisSwing:  0.00%
+PlayingCello: 100.00% <br>
+ShavingBeard:  0.00% <br>
+Punch:  0.00% <br>
+TennisSwing:  0.00% <br>
 CricketShot:  0.00%
