@@ -139,4 +139,48 @@ def run_experiment():
 ```
 
 ## Model performance
-<img src="https://miro.medium.com/max/1400/1*iy12bH-FiUNOy9-0bULgSg.png"/>
+<img src="https://github.com/Murugan-Karthick/Spatio-Temporal-Action-Recognition-with-Hybrid-Transformers/blob/main/results.png" width="500" height="500"/>
+
+## Inference
+For inference we need to do video preprocessing before input to the model
+```
+def prepare_single_video(frames):
+    frame_features = np.zeros(shape=(1, MAX_SEQ_LENGTH, NUM_FEATURES), dtype="float32")
+
+    # Pad shorter videos.
+    if len(frames) < MAX_SEQ_LENGTH:
+        diff = MAX_SEQ_LENGTH - len(frames)
+        padding = np.zeros((diff, IMG_SIZE, IMG_SIZE, 3))
+        frames = np.concatenate(frames, padding)
+
+    frames = frames[None, ...]
+
+    # Extract features from the frames of the current video.
+    for i, batch in enumerate(frames):
+        video_length = batch.shape[0]
+        length = min(MAX_SEQ_LENGTH, video_length)
+        for j in range(length):
+            if np.mean(batch[j, :]) > 0.0:
+                frame_features[i, j, :] = feature_extractor.predict(batch[None, j, :])
+            else:
+                frame_features[i, j, :] = 0.0
+
+    return frame_features
+```
+
+## Check sample predictions
+```
+def predict_action(path):
+    class_vocab = label_processor.get_vocabulary()
+
+    frames = load_video(os.path.join("test", path))
+    frame_features = prepare_single_video(frames)
+    probabilities = trained_model.predict(frame_features)[0]
+
+    for i in np.argsort(probabilities)[::-1]:
+        print(f"  {class_vocab[i]}: {probabilities[i] * 100:5.2f}%")
+    return frames
+```
+
+## Output
+
